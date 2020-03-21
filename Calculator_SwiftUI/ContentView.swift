@@ -8,90 +8,95 @@
 
 import SwiftUI
 
-struct ContentView: View
+struct NumberView: View
 {
-    @State var firstValue = "0"
+    let number: Double
+    var numberString: String
+    {
+        if number == .pi
+        {
+            return "ℿ"
+        }
+        
+        return String(Int(number))
+    }
     
     var body: some View
     {
-        NavigationView
+        Text(numberString)
+            .font(.title)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .frame(width:64, height: 64)
+            .background(Color.blue)
+            .cornerRadius(20)
+            .shadow(color: Color.blue.opacity(0.3), radius: 10, x: 0, y: 10)
+    }
+}
+
+struct GradientButtonStyle: ButtonStyle
+{
+    var buttonWidth: CGFloat=64
+    
+    func makeBody(configuration: Self.Configuration) -> some View
+    {
+        configuration.label
+            .foregroundColor(Color.white)
+            .frame(width:buttonWidth, height: 64)
+            .background(configuration.isPressed ? Color.yellow : Color.blue)
+            .cornerRadius(90)
+            .shadow(color: Color.blue.opacity(0.3), radius: 10, x: 0, y: 10)
+    }
+}
+
+struct ContentView: View
+{
+    @State var currentNumber: Double = 0
+    @State var firstNumber = "0"
+    var displayString: String
+    {
+        return String(format: "%.2f", arguments:[currentNumber])
+    }
+    
+    var body: some View
+    {
+    //    VStack(alignment: .trailing, spacing: 20)
+        VStack
         {
-            VStack
+            Text(firstNumber)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .lineLimit(3)
+                .padding()
+                
+            HStack
             {
-                Form
+                Button(action: {  self.firstNumber = AccumulateValue(inputNum: 1, currentNum: self.firstNumber) })
                 {
-                    Text(firstValue)
-                    .bold()
-                    .font(.title)
-                }.navigationBarTitle("Calculator")
-                VStack
+                    Text("1")
+                        .font(.title)
+                        .fontWeight(.bold)
+
+                }.buttonStyle(GradientButtonStyle(buttonWidth: 120))
+                
+                Button(action: {  self.firstNumber = AccumulateValue(inputNum: 2, currentNum: self.firstNumber) })
                 {
-                    HStack
-                    {
-                        Button("1")
-                        {
-                        
-                        }
-                        .frame(minWidth: 10, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.red)
-                        
-                        Button("2")
-                        {
-                            
-                        }
-                        Button("3")
-                        {
-                            
-                        }
-                    }
-                    HStack
-                    {
-                        Button("3")
-                        {
-                        
-                        }
-                        .frame(minWidth: 10, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.red)
-                        
-                        Button("4")
-                        {
-                            
-                        }
-                        Button("5")
-                        {
-                            
-                        }
-                    }
-                    HStack
-                    {
-                        Button("0")
-                        {
-                        
-                        }
-                        .frame(minWidth: 10, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.red)
-                        
-                        Button("1")
-                        {
-                            
-                        }
-                        Button("2")
-                        {
-                            
-                        }
-                    }
-                }
+                    Text("2")
+                        .font(.title)
+                        .fontWeight(.bold)
+
+                }.buttonStyle(GradientButtonStyle())
+                
             }
-        }
+        }.padding(32)
+        
+
     }
 }
 
 func AccumulateValue(inputNum: Int, currentNum: String)->String
 {
-    var temp = " "
+    let temp = currentNum + String(inputNum)
     
     return temp
 }
