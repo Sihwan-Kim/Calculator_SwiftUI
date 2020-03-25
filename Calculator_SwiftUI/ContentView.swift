@@ -28,7 +28,7 @@ struct ContentView: View
 {
     @State var currentNumber =  "0"
     @State var firstNumber: Double = 0
-    @State var Operand = 0 ;  // 1:+, 2:-, 3:X, 4:/
+    @State var iOperator = 0 ;  // 1:+, 2:-, 3:X, 4:/
     @State var pointExist = false
     
     var displayString: String
@@ -38,18 +38,29 @@ struct ContentView: View
     
     var body: some View
     {
-    //    VStack(alignment: .trailing, spacing: 20)
         VStack
         {
+
+            Text(String(firstNumber))
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                .padding()
+ 
             Text(currentNumber)
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .lineLimit(3)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
                 .padding()
-            
+
             HStack
             {
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 1, currentNum: self.currentNumber) })
+                Button(action:
+                {
+                    self.currentNumber = "0"
+                    self.firstNumber = 0
+                    self.iOperator = 0
+                })
                 {
                     Text("AC")
                         .font(.title)
@@ -57,7 +68,12 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
                 
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 2, currentNum: self.currentNumber) })
+                Button(action:
+                {
+                    let value = Double(self.currentNumber)
+                    self.firstNumber = sqrt(value ?? 0)
+                    self.currentNumber = "0"
+                })
                 {
                     Text("Pi")
                         .font(.title)
@@ -75,7 +91,7 @@ struct ContentView: View
                 
                 Button(action:
                 {
-                    self.Operand = 4 ;
+                    self.iOperator = 4 ;
                     self.firstNumber = Double(self.currentNumber)!
                     self.currentNumber = "0"
                     self.pointExist = false
@@ -116,7 +132,7 @@ struct ContentView: View
                 
                 Button(action:
                 {
-                    self.Operand = 3 ;
+                    self.iOperator = 3 ;
                     self.firstNumber = Double(self.currentNumber)!
                     self.currentNumber = "0"
                     self.pointExist = false
@@ -157,7 +173,7 @@ struct ContentView: View
                 
                 Button(action:
                 {
-                    self.Operand = 2 ;
+                    self.iOperator = 2 ;
                     self.firstNumber = Double(self.currentNumber)!
                     self.currentNumber = "0"
                     self.pointExist = false
@@ -198,7 +214,7 @@ struct ContentView: View
                 
                 Button(action:
                 {
-                    self.Operand = 1 ;
+                    self.iOperator = 1 ;
                     self.firstNumber = Double(self.currentNumber)!
                     self.currentNumber = "0"
                     self.pointExist = false
@@ -238,7 +254,11 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle())
                 
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 2, currentNum: self.currentNumber) })
+                Button(action:
+                {
+                    let operand = Double(self.currentNumber)
+                    self.firstNumber = Calculate(first: self.firstNumber, second: operand ?? 0, oper: self.iOperator)
+                })
                 {
                     Text("=")
                         .font(.title)
@@ -252,7 +272,7 @@ struct ContentView: View
 
     }
 }
-
+//--------------------------------------------------------------------------------------------------
 func AccumulateValue(inputNum: Int, currentNum: String)->String
 {
     var result: String
@@ -268,17 +288,24 @@ func AccumulateValue(inputNum: Int, currentNum: String)->String
     
     return result
 }
-
-func Calculate(first:Double, second:Double, operator:Int)->Double
+//--------------------------------------------------------------------------------------------------
+func Calculate(first:Double, second:Double, oper:Int)->Double
 {
-    var result:Double
+    var result:Double = 0
     
-    switch(operator)
+    switch oper
     {
-    case 1: 
+    case 1 : result = first + second
+    case 2 : result = first - second
+    case 3 : result = first * second
+    case 4 : result = first / second
+    default:
+        result = 0
     }
+    
+    return result 
 }
-
+//--------------------------------------------------------------------------------------------------
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
