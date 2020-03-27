@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GradientButtonStyle: ButtonStyle
 {
-    var buttonWidth: CGFloat=90
+    var buttonWidth: CGFloat = (UIScreen.main.bounds.size.width / 4) - 10
     var forgroundColor: Color = Color.gray
     
     func makeBody(configuration: Self.Configuration) -> some View
@@ -31,28 +31,40 @@ struct ContentView: View
     @State var iOperator = 0 ;  // 1:+, 2:-, 3:X, 4:/
     @State var pointExist = false
     
-    var displayString: String
+    func operatorClicked(Oper:Int)
     {
-        return String(format: "%.2f", arguments:[currentNumber])
+        self.iOperator = Oper ;
+        if(self.currentNumber != "0")
+        {
+            self.firstNumber = Double(self.currentNumber)!
+        }
+        self.currentNumber = "0"
+        self.pointExist = false
     }
     
     var body: some View
     {
         VStack
         {
+            VStack
+            {
 
-            Text(String(firstNumber))
-                .font(.largeTitle)
-                .fontWeight(.heavy)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                .padding()
- 
-            Text(currentNumber)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                .padding()
-
+                Text(String(firstNumber))
+                    .font(.largeTitle)
+                    .fontWeight(.heavy)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                    .padding()
+                    .padding()
+     
+                Text(currentNumber)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                    .padding()
+                    .padding()
+            }
+            .padding()
+            
             HStack
             {
                 Button(action:
@@ -81,7 +93,12 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
                 
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 1, currentNum: self.currentNumber) })
+                Button(action:
+                {
+                    let value = Double(self.currentNumber)
+                    self.firstNumber = self.firstNumber * ((value ?? 0) / 100.0)
+                    self.currentNumber = "0"
+                })
                 {
                     Text("%")
                         .font(.title)
@@ -89,13 +106,7 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
                 
-                Button(action:
-                {
-                    self.iOperator = 4 ;
-                    self.firstNumber = Double(self.currentNumber)!
-                    self.currentNumber = "0"
-                    self.pointExist = false
-                })
+                Button(action:{ self.operatorClicked(Oper: 4)})
                 {
                     Text("÷")
                         .font(.title)
@@ -130,13 +141,7 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle())
                 
-                Button(action:
-                {
-                    self.iOperator = 3 ;
-                    self.firstNumber = Double(self.currentNumber)!
-                    self.currentNumber = "0"
-                    self.pointExist = false
-                })
+                Button(action:{ self.operatorClicked(Oper: 3)})
                 {
                     Text("×")
                         .font(.title)
@@ -171,13 +176,7 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle())
                 
-                Button(action:
-                {
-                    self.iOperator = 2 ;
-                    self.firstNumber = Double(self.currentNumber)!
-                    self.currentNumber = "0"
-                    self.pointExist = false
-                })
+                Button(action:{ self.operatorClicked(Oper: 2)})
                 {
                     Text("-")
                         .font(.title)
@@ -212,14 +211,7 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle())
                 
-                Button(action:
-                {
-                    self.iOperator = 1 ;
-                    self.firstNumber = Double(self.currentNumber)!
-                    self.currentNumber = "0"
-                    self.pointExist = false
-                    
-                })
+                Button(action:{ self.operatorClicked(Oper: 1)})
                 {
                     Text("+")
                         .font(.title)
@@ -245,7 +237,6 @@ struct ContentView: View
                         self.currentNumber += "."
                         self.pointExist = true
                     }
-                    
                 })
                 {
                     Text(".")
@@ -258,6 +249,7 @@ struct ContentView: View
                 {
                     let operand = Double(self.currentNumber)
                     self.firstNumber = Calculate(first: self.firstNumber, second: operand ?? 0, oper: self.iOperator)
+                    self.currentNumber = "0"
                 })
                 {
                     Text("=")
@@ -266,10 +258,7 @@ struct ContentView: View
 
                 }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
             }
-
-        }.padding(32)
-        
-
+        }.padding()
     }
 }
 //--------------------------------------------------------------------------------------------------
