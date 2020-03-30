@@ -10,7 +10,7 @@ import SwiftUI
 
 struct GradientButtonStyle: ButtonStyle
 {
-    var buttonWidth: CGFloat = (UIScreen.main.bounds.size.width / 4) - 10
+    var buttonWidth: CGFloat = 90
     var forgroundColor: Color = Color.gray
     
     func makeBody(configuration: Self.Configuration) -> some View
@@ -26,6 +26,7 @@ struct GradientButtonStyle: ButtonStyle
 
 struct ContentView: View
 {
+    let buttonsize: CGFloat = (UIScreen.main.bounds.size.width / 4) - 10
     @State var currentNumber =  "0"
     @State var firstNumber: Double = 0
     @State var iOperator = 0 ;  // 1:+, 2:-, 3:X, 4:/
@@ -44,9 +45,6 @@ struct ContentView: View
     
     var body: some View
     {
-        
-        NavigationView
-        {
             VStack
             {
                 VStack
@@ -57,14 +55,14 @@ struct ContentView: View
                         .fontWeight(.heavy)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
                         .padding()
-                        .padding()
+                    //    .padding()
          
                     Text(currentNumber)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                        .padding()
-                        .padding()
+                    //    .padding()
+                  //      .padding()
                 }
                 .padding()
                 
@@ -81,7 +79,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.green))
                     
                     Button(action:
                     {
@@ -94,7 +92,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.green))
                     
                     Button(action:
                     {
@@ -107,7 +105,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.green))
                     
                     Button(action:{ self.operatorClicked(Oper: 4)})
                     {
@@ -115,7 +113,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.black )
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }
                 
                 HStack
@@ -126,7 +124,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 8, currentNum: self.currentNumber) })
                     {
@@ -134,7 +132,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 9, currentNum: self.currentNumber) })
                     {
@@ -142,7 +140,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action:{ self.operatorClicked(Oper: 3)})
                     {
@@ -150,7 +148,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }.padding()
                 
                 HStack
@@ -161,7 +159,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 5, currentNum: self.currentNumber) })
                     {
@@ -169,7 +167,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 6, currentNum: self.currentNumber) })
                     {
@@ -177,7 +175,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action:{ self.operatorClicked(Oper: 2)})
                     {
@@ -185,7 +183,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }
                     
                 HStack
@@ -196,7 +194,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 2, currentNum: self.currentNumber) })
                     {
@@ -204,7 +202,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action: {  self.currentNumber = AccumulateValue(inputNum: 3, currentNum: self.currentNumber) })
                     {
@@ -212,7 +210,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action:{ self.operatorClicked(Oper: 1)})
                     {
@@ -220,7 +218,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }.padding()
                 
                 HStack
@@ -231,7 +229,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(buttonWidth: 188))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize*2+10))
                                     
                     Button(action:
                     {
@@ -246,7 +244,7 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize))
                     
                     Button(action:
                     {
@@ -259,11 +257,9 @@ struct ContentView: View
                             .font(.title)
                             .fontWeight(.bold)
 
-                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }
             }.padding()
-            .navigationBarTitle(Text("Calculator"))
-        }
     }
 }
 //--------------------------------------------------------------------------------------------------
@@ -303,5 +299,6 @@ func Calculate(first:Double, second:Double, oper:Int)->Double
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+//        .previewDevice(PreviewDevice(rawValue: "iPhone 7"))
     }
 }
