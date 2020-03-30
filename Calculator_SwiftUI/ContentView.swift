@@ -44,221 +44,226 @@ struct ContentView: View
     
     var body: some View
     {
-        VStack
+        
+        NavigationView
         {
             VStack
             {
+                VStack
+                {
 
-                Text(String(firstNumber))
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                    .padding()
-                    .padding()
-     
-                Text(currentNumber)
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                    .padding()
-                    .padding()
-            }
-            .padding()
-            
-            HStack
-            {
-                Button(action:
-                {
-                    self.currentNumber = "0"
-                    self.firstNumber = 0
-                    self.iOperator = 0
-                })
-                {
-                    Text("AC")
-                        .font(.title)
+                    Text(String(firstNumber))
+                        .font(.largeTitle)
+                        .fontWeight(.heavy)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                        .padding()
+                        .padding()
+         
+                    Text(currentNumber)
+                        .font(.largeTitle)
                         .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                        .padding()
+                        .padding()
+                }
+                .padding()
                 
-                Button(action:
+                HStack
                 {
-                    let value = Double(self.currentNumber)
-                    self.firstNumber = sqrt(value ?? 0)
-                    self.currentNumber = "0"
-                })
-                {
-                    Text("Pi")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
-                
-                Button(action:
-                {
-                    let value = Double(self.currentNumber)
-                    self.firstNumber = self.firstNumber * ((value ?? 0) / 100.0)
-                    self.currentNumber = "0"
-                })
-                {
-                    Text("%")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
-                
-                Button(action:{ self.operatorClicked(Oper: 4)})
-                {
-                    Text("÷")
-                        .font(.title)
-                        .fontWeight(.black )
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
-            }
-            
-            HStack
-            {
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 7, currentNum: self.currentNumber) })
-                {
-                    Text("7")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 8, currentNum: self.currentNumber) })
-                {
-                    Text("8")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 9, currentNum: self.currentNumber) })
-                {
-                    Text("9")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action:{ self.operatorClicked(Oper: 3)})
-                {
-                    Text("×")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
-            }.padding()
-            
-            HStack
-            {
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 4, currentNum: self.currentNumber) })
-                {
-                    Text("4")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 5, currentNum: self.currentNumber) })
-                {
-                    Text("5")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 6, currentNum: self.currentNumber) })
-                {
-                    Text("6")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action:{ self.operatorClicked(Oper: 2)})
-                {
-                    Text("-")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
-            }
-                
-            HStack
-            {
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 1, currentNum: self.currentNumber) })
-                {
-                    Text("1")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 2, currentNum: self.currentNumber) })
-                {
-                    Text("2")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 3, currentNum: self.currentNumber) })
-                {
-                    Text("3")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle())
-                
-                Button(action:{ self.operatorClicked(Oper: 1)})
-                {
-                    Text("+")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
-            }.padding()
-            
-            HStack
-            {
-                Button(action: {  self.currentNumber = AccumulateValue(inputNum: 0, currentNum: self.currentNumber) })
-                {
-                    Text("0")
-                        .font(.title)
-                        .fontWeight(.bold)
-
-                }.buttonStyle(GradientButtonStyle(buttonWidth: 188))
-                                
-                Button(action:
-                {
-                    if (self.pointExist == false)
+                    Button(action:
                     {
-                        self.currentNumber += "."
-                        self.pointExist = true
-                    }
-                })
-                {
-                    Text(".")
-                        .font(.title)
-                        .fontWeight(.bold)
+                        self.currentNumber = "0"
+                        self.firstNumber = 0
+                        self.iOperator = 0
+                    })
+                    {
+                        Text("AC")
+                            .font(.title)
+                            .fontWeight(.bold)
 
-                }.buttonStyle(GradientButtonStyle())
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    
+                    Button(action:
+                    {
+                        let value = Double(self.currentNumber)
+                        self.firstNumber = sqrt(value ?? 0)
+                        self.currentNumber = "0"
+                    })
+                    {
+                        Text("Pi")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    
+                    Button(action:
+                    {
+                        let value = Double(self.currentNumber)
+                        self.firstNumber = self.firstNumber * ((value ?? 0) / 100.0)
+                        self.currentNumber = "0"
+                    })
+                    {
+                        Text("%")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.green))
+                    
+                    Button(action:{ self.operatorClicked(Oper: 4)})
+                    {
+                        Text("÷")
+                            .font(.title)
+                            .fontWeight(.black )
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                }
                 
-                Button(action:
+                HStack
                 {
-                    let operand = Double(self.currentNumber)
-                    self.firstNumber = Calculate(first: self.firstNumber, second: operand ?? 0, oper: self.iOperator)
-                    self.currentNumber = "0"
-                })
-                {
-                    Text("=")
-                        .font(.title)
-                        .fontWeight(.bold)
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 7, currentNum: self.currentNumber) })
+                    {
+                        Text("7")
+                            .font(.title)
+                            .fontWeight(.bold)
 
-                }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
-            }
-        }.padding()
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 8, currentNum: self.currentNumber) })
+                    {
+                        Text("8")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 9, currentNum: self.currentNumber) })
+                    {
+                        Text("9")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action:{ self.operatorClicked(Oper: 3)})
+                    {
+                        Text("×")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                }.padding()
+                
+                HStack
+                {
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 4, currentNum: self.currentNumber) })
+                    {
+                        Text("4")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 5, currentNum: self.currentNumber) })
+                    {
+                        Text("5")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 6, currentNum: self.currentNumber) })
+                    {
+                        Text("6")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action:{ self.operatorClicked(Oper: 2)})
+                    {
+                        Text("-")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                }
+                    
+                HStack
+                {
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 1, currentNum: self.currentNumber) })
+                    {
+                        Text("1")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 2, currentNum: self.currentNumber) })
+                    {
+                        Text("2")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 3, currentNum: self.currentNumber) })
+                    {
+                        Text("3")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action:{ self.operatorClicked(Oper: 1)})
+                    {
+                        Text("+")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                }.padding()
+                
+                HStack
+                {
+                    Button(action: {  self.currentNumber = AccumulateValue(inputNum: 0, currentNum: self.currentNumber) })
+                    {
+                        Text("0")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(buttonWidth: 188))
+                                    
+                    Button(action:
+                    {
+                        if (self.pointExist == false)
+                        {
+                            self.currentNumber += "."
+                            self.pointExist = true
+                        }
+                    })
+                    {
+                        Text(".")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle())
+                    
+                    Button(action:
+                    {
+                        let operand = Double(self.currentNumber)
+                        self.firstNumber = Calculate(first: self.firstNumber, second: operand ?? 0, oper: self.iOperator)
+                        self.currentNumber = "0"
+                    })
+                    {
+                        Text("=")
+                            .font(.title)
+                            .fontWeight(.bold)
+
+                    }.buttonStyle(GradientButtonStyle(forgroundColor: Color.orange))
+                }
+            }.padding()
+            .navigationBarTitle(Text("Calculator"))
+        }
     }
 }
 //--------------------------------------------------------------------------------------------------
