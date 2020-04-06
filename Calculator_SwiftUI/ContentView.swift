@@ -45,27 +45,22 @@ struct ContentView: View
     
     var body: some View
     {
+        VStack
+        {
+            Text(String(firstNumber))
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                .padding()
+
+            Text(currentNumber)
+                .font(.largeTitle)
+                .fontWeight(.bold)
+                .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
+                .padding()
+
             VStack
             {
-                VStack
-                {
-
-                    Text(String(firstNumber))
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                        .padding()
-                    //    .padding()
-         
-                    Text(currentNumber)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .trailing)
-                    //    .padding()
-                  //      .padding()
-                }
-                .padding()
-                
                 HStack
                 {
                     Button(action:
@@ -259,7 +254,8 @@ struct ContentView: View
 
                     }.buttonStyle(GradientButtonStyle(buttonWidth: buttonsize, forgroundColor: Color.orange))
                 }
-            }.padding()
+            }
+        }
     }
 }
 //--------------------------------------------------------------------------------------------------
@@ -299,6 +295,6 @@ func Calculate(first:Double, second:Double, oper:Int)->Double
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-//        .previewDevice(PreviewDevice(rawValue: "iPhone 7"))
+        .previewDevice(PreviewDevice(rawValue: "iPhone 7"))
     }
 }
